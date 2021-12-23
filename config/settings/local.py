@@ -54,7 +54,13 @@ INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
 # django-extensions
 # ------------------------------------------------------------------------------
 # https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
-INSTALLED_APPS += ["django_extensions"]  # noqa F405
+INSTALLED_APPS += [
+    "django_extensions"
+]  # noqa F405
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+# Set NPM_BIN_PATH variable to match path of NPM executable in system
+NPM_BIN_PATH = Path(r"C:\Program Files\nodejs\npm.cmd")
+

@@ -272,3 +272,7 @@ tags
 gumroad_clone/media/
 
 .pytest_cache/
+
+
+# My staff
+.env
