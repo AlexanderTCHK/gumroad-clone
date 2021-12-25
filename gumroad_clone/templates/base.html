@@ -1,7 +1,9 @@
 {% load static i18n %}
+{% load tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% tailwind_css %}
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>{% block title %}djgumroad{% endblock title %}</title>
@@ -15,16 +17,12 @@
     <![endif]-->
 
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
-    <link
-      rel="stylesheet"
-      href="{% static 'css/styles.css' %}"
-      type="text/css"
-    />
 
+{% comment %} 
     {% block css %}
     <!-- This file stores project-specific CSS -->
     <link href="{% static 'css/project.css' %}" rel="stylesheet" />
-    {% endblock %}
+    {% endblock %} {% endcomment %}
     <!-- Le javascript
 		================================================== -->
     {% block javascript %}

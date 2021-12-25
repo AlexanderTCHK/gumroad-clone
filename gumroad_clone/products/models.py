@@ -2,6 +2,11 @@ from django.db import models
 from django.urls import reverse
 
 class Product(models.Model):
+    user = models.ForeignKey(
+        "users.User",
+        on_delete=models.CASCADE,
+        related_name="products"
+    )
     name = models.CharField(max_length=100)
     description = models.TextField()
     cover = models.ImageField(null=True, blank=True, upload_to="product_covers")
@@ -11,6 +16,7 @@ class Product(models.Model):
     content_url = models.URLField(null=True, blank=True)
     content_file = models.FileField(null=True, blank=True)
 
+    active = models.BooleanField(default=False)
     price = models.PositiveIntegerField(default=1)
 
     def __str__(self):
@@ -18,7 +24,12 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("products:product-detail", kwargs={"slug": self.slug})
-    
 
+    def get_update_url(self):
+        return reverse("products:product-update", kwargs={"slug": self.slug})
+
+    def get_delete_url(self):
+        return reverse("products:product-delete", kwargs={"slug": self.slug})
+    
     def price_display(self):
         return "{0:.2f}".format(self.price/100)

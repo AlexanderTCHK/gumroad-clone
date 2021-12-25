@@ -28,7 +28,7 @@ class User(AbstractUser):
 
 
 class UserLibrary(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="library")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="library")
     products = models.ManyToManyField(Product, blank=True)
 
     class Meta:

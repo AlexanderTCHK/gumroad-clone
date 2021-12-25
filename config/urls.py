@@ -6,11 +6,13 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from rest_framework.authtoken.views import obtain_auth_token
 
-from products.views import ProductListView
+from products.views import ProductListView, UserProductListView, ProductCreateView, paymentComplete
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path("discover/", ProductListView.as_view(), name="discover" ),
+    path("products/", UserProductListView.as_view(), name="user-products"),
+    path("products/create", ProductCreateView.as_view(), name="product-create"),
     path("p/", include("products.urls", namespace="products")),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
