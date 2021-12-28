@@ -276,3 +276,5 @@ gumroad_clone/media/
 
 # My staff
 .env
+
+ngrok

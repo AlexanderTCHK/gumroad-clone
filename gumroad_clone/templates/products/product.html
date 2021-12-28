@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-
 {% block content %}
-{% csrf_token %}
+
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-wrap -m-4">
@@ -14,8 +13,25 @@
           {% comment %} <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3> {% endcomment %}
           <h2 class="text-gray-900 title-font text-lg font-medium">{{ product.name }}</h2>
           <p class="mt-1">{{ product.price_display }}</p>
-
-
+          {% if has_access %}
+          <p class="text-lg text-gray-500">You have access to this product</p>
+          {% if product.content_url %}
+          <a href="{{ product.content_url }}" target="_blank" rel="nofollow noreferrer"
+            class="mt-5 center bg-blue-500 px-3 py-2 rounded-md text-white hover:bg-blue-600" type="submit">
+            View Content</a>
+          {% endif %}
+          {% if product.content_file %}
+          <a href="{{ product.content_file }}" download
+            class="mt-5 center bg-blue-500 px-3 py-2 rounded-md text-white hover:bg-blue-600" type="submit">
+            View Content</a>
+          {% endif %}
+          {% else %}
+          {% csrf_token %}
+          <form action="{% url 'create-checkout-session' product.slug %}" method="POST">
+            <button class="mt-5 center bg-blue-500 px-3 py-2 rounded-md text-white hover:bg-blue-600" type="submit">
+              Checkout</button>
+          </form>
+          {% endif %}
 
         </div>
       </div>
@@ -24,3 +40,7 @@
 </section>
 
 {% endblock content %}
+<script>
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+</script>

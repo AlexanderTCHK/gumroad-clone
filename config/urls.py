@@ -6,14 +6,32 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from rest_framework.authtoken.views import obtain_auth_token
 
-from products.views import ProductListView, UserProductListView, ProductCreateView, paymentComplete
+from products.views import (
+    ProductListView, 
+    UserProductListView, 
+    ProductCreateView, 
+    # CreateCheckoutSessionView,
+    SuccessView,
+    checkout_session_create,
+    stripe_webhook,
+)
+
+from users.views import (
+    UserProfileView,
+    StripeAccountLink,
+)
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path("discover/", ProductListView.as_view(), name="discover" ),
     path("products/", UserProductListView.as_view(), name="user-products"),
-    path("products/create", ProductCreateView.as_view(), name="product-create"),
+    path("products/create/", ProductCreateView.as_view(), name="product-create"),
+    path("profile/", UserProfileView.as_view(), name="profile"),
+    path("stripe/auth/", StripeAccountLink.as_view(), name="stripe-account-link"),
     path("p/", include("products.urls", namespace="products")),
+    path("create-checkout-session/<slug>/", checkout_session_create, name="create-checkout-session"),
+    path("success/", SuccessView.as_view(), name="success"),
+    path("webhooks/stripe/", stripe_webhook, name="stripe-webhook"),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management

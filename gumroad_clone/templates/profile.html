@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <h2 class="text-2xl text-gray-900">Profile</h2>
+    <p class="text-gray-500">Connect your Stripe account to get paid</p>
+
+    <a href="{% url 'stripe-account-link' %}"
+      class="mt-5 w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
+      Connect with Stripe
+    </a>
+    {% if details_submitted %}
+    <p class="text-gray-500">Your account is complete and you will receive payouts</p>
+    {% else %}
+    <p class="text-gray-500">Your account is incomplete. Please click on the Stripe Connect button to complete your
+      profile</p>
+    {% endif %}
+    <div class="flex flex-wrap -m-4">
+      {% for product in request.user.userlibrary.products.all %}
+      <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+        <a href="{{ product.get_absolute_url }}" class="block relative h-48 rounded overflow-hidden">
+          <img alt="{{ product.name }}" class="object-cover object-center w-full h-full block"
+            src="{% if product.cover %} {{ product.cover.url }} {% else %} https://dummyimage.com/420x260 {% endif %}">
+        </a>
+        <div class="mt-4">
+          {% comment %} <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3> {% endcomment %}
+          <a href="{{ product.get_absolute_url }}">
+            <h2 class="text-gray-900 title-font text-lg font-medium">{{ product.name }}</h2>
+          </a>
+          <p class="mt-1">{{ product.price_display }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
