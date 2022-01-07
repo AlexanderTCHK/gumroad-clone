@@ -269,7 +269,7 @@ Session.vim
 tags
 
 ### Project template
-gumroad_clone/media/
+#gumroad_clone/media/
 
 .pytest_cache/
 
