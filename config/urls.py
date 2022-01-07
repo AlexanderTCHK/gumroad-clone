@@ -23,12 +23,12 @@ from users.views import (
 )
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),#
-    path("discover/", ProductListView.as_view(), name="discover" ),# DONE
-    path("products/", UserProductListView.as_view(), name="user-products"),# DONE
-    path("library/", UserLibraryView.as_view(), name="user-library"),# DONE
-    path("products/create/", ProductCreateView.as_view(), name="product-create"), # DONE
-    path("profile/", UserProfileView.as_view(), name="profile"),#
+    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("discover/", ProductListView.as_view(), name="discover" ),
+    path("products/", UserProductListView.as_view(), name="user-products"),
+    path("library/", UserLibraryView.as_view(), name="user-library"),
+    path("products/create/", ProductCreateView.as_view(), name="product-create"),
+    path("profile/", UserProfileView.as_view(), name="profile"),
     path("stripe/auth/", StripeAccountLink.as_view(), name="stripe-account-link"),
     path("p/", include("products.urls", namespace="products")),
     path("create-checkout-session/<slug>/", checkout_session_create, name="create-checkout-session"),
