@@ -17,7 +17,7 @@ django-redis==5.1.0  # https://github.com/jazzband/django-redis
 
 crispy-tailwind==0.5.0
 django-tailwind==3.0.1
-strip==2.64.0
+stripe==2.64.0
 # Django REST Framework
 djangorestframework==3.13.0  # https://github.com/encode/django-rest-framework
 django-cors-headers==3.10.1 # https://github.com/adamchainz/django-cors-headers
