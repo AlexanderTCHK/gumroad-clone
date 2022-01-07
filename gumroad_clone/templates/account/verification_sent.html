@@ -5,16 +5,34 @@
 {% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
 
 {% block content %}
-    <div class="prose-lg">
-        <h1>{% trans "Start Selling! 🎉" %}</h1>
+<div class="bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0"
+    style="font-family:'Lato',sans-serif;">
+    <header class="max-w-lg mx-auto">
+        <a href="{% url 'home' %}">
+            <h1 class="text-4xl font-bold text-white text-center">DJANGO GUMROAD CLONE</h1>
+        </a>
+    </header>
 
-        <p>Thank you for joining! We just need you to confirm your email address.</p>
+    <div class="bg-white max-w-5xl mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
 
-        <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the
-            signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
 
-        <p>One quick note: Please check your spam for an email from us. If it does show up in spam, please move it over
-            to your inbox, as that will let you see future emails from us 😁</p>
+        <section class="mt-5">
+            <div class="prose-lg">
+                <h1 class="text-center">{% trans "Start Selling! 🎉" %}</h1>
+
+                <p>Thank you for joining! We just need you to confirm your email address.</p>
+
+                <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize
+                    the
+                    signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}
+                </p>
+
+                <p>One quick note: Please check your spam for an email from us. If it does show up in spam, please move
+                    it over
+                    to your inbox, as that will let you see future emails from us 😁</p>
+            </div>
+        </section>
     </div>
 
+</div>
 {% endblock %}

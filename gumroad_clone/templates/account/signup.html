@@ -6,39 +6,46 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
-    <div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-                Start selling products
-            </h2>
-            <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
-                Already have an account?
+<div class="bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0"
+    style="font-family:'Lato',sans-serif;">
+    <header class="max-w-lg mx-auto">
+        <a href="{% url 'home' %}">
+            <h1 class="text-4xl font-bold text-white text-center">DJANGO GUMROAD CLONE</h1>
+        </a>
+    </header>
+
+    <div class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+        <section>
+            <h3 class="font-bold text-2xl text-center"> Start selling products!</h3>
+            <p class="text-gray-600 pt-3 text-lg text-center">Create your account.</p>
+            <p class="text-gray-600 pt-1 text-center">
+                Already have an
                 <a href="{{ login_url }}"
-                   class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                    sign in
+                    class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    account?
                 </a>
             </p>
-        </div>
+        </section>
 
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="py-8 px-4 sm:px-10">
-                <form method="post" action="{% url 'account_signup' %}">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}"
-                               value="{{ redirect_field_value }}"/>
-                    {% endif %}
-                    <div class="mt-6">
-                      <span class="block w-full rounded-md shadow-sm">
+        <section class="mt-5">
+            <form method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <div class="mt-6">
+                    <span class="block w-full rounded-md shadow-sm">
                         <button type="submit"
-                                class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
-                          {% trans "Sign Up" %}
+                            class="w-full flex justify-center py-2 px-4 bg-pink-400 font-semibold text-lg rounded-md border border-black hover:scale-[1.01] hover:border-b-4 hover:border-r-4 hover:border-black">
+
+                            {% trans "Sign Up" %}
                         </button>
-                      </span>
-                    </div>
-                </form>
-            </div>
-        </div>
+                    </span>
+                </div>
+            </form>
+        </section>
     </div>
+
+</div>
 {% endblock %}

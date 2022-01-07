@@ -59,8 +59,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
-
+        return reverse("discover")
 
 user_redirect_view = UserRedirectView.as_view()
 
@@ -69,15 +68,13 @@ class StripeAccountLink(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        domain = "https://domain.com"
-        if settings.DEBUG:
-            domain = "http://127.0.0.1:80"
+        # Domain for success and cancel urls
+        domain = "http://" + settings.ALLOWED_HOSTS[0]
+
         account_link = stripe.AccountLink.create(
             account = self.request.user.stripe_account_id,
             refresh_url = domain + reverse("stripe-account-link"),
             return_url = domain + reverse("profile"),
             type = "account_onboarding",
         )
-        print(account_link)
-        print(account_link["url"])
         return account_link["url"]

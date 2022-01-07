@@ -74,6 +74,8 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
@@ -84,9 +86,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "gumroad_clone.users.apps.UsersConfig",
+    "users",
     "gumroad_clone.theme.apps.ThemeConfig",
-    "gumroad_clone.products.apps.ProductsConfig",
+    "products",
     # Your stuff: custom apps go here
 ]
 

@@ -18,16 +18,13 @@ class User(AbstractUser):
     name = CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
+    
+    # Stripe account for purchasing
     stripe_customer_id = models.CharField(max_length=100, blank=True, null=True)
+    # Stripe account for selling
     stripe_account_id = models.CharField(max_length=100)
 
     def get_absolute_url(self):
-        """Get url for user's detail view.
-
-        Returns:
-            str: URL for user detail.
-
-        """
         return reverse("users:detail", kwargs={"username": self.username})
 
 
@@ -39,7 +36,7 @@ class UserLibrary(models.Model):
         verbose_name_plural = "UserLibraries"
 
     def __str__(self):
-        return self.user.email
+        return self.user.username
 
 def create_userlibrary_post_user(sender, instance, created, **kwargs):
     if created:
@@ -47,10 +44,10 @@ def create_userlibrary_post_user(sender, instance, created, **kwargs):
 
         # assign all the anonymous  checkouts / products they purchased
         purchased_products = PurchasedProduct.objects.filter(email=instance.email)
-
         for purchased_product in purchased_products:
             library.products.add(purchased_product.product)
         
+        # Create a stripe_account_id for all Users
         account = stripe.Account.create(type = "express")
         instance.stripe_account_id = account["id"]
         instance.save()

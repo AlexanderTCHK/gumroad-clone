@@ -4,33 +4,33 @@
 {% load tailwind_filters %}
 
 {% block content %}
-    <div>
+<div class="flex flex-row h-screen bg-stone-100 text-gray-900">
+    {% include "sidebar.html" %}
+    <div class="flex-auto flex-row justify-center overflow-y-auto">
         <div class="sm:mx-auto sm:w-full sm:max-w-3xl">
-            <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+            <h2 class="mt-10 text-center text-3xl leading-9 font-extrabold text-gray-900">
                 Update {{ object.name }}
             </h2>
         </div>
 
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-3xl">
+        <div class="mt-1 sm:mx-auto sm:w-full sm:max-w-3xl">
             <div class="py-8 px-4 sm:rounded-lg sm:px-10">
                 <div class="mt-4">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div class="mt-6">
-                            <span class="block w-full rounded-md shadow-sm">
+                            <span class="flex justify-center">
                                 <button type="submit"
-                                        class="w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
+                                    class="w-48 bg-pink-400 font-semibold text-lg px-5 py-3 rounded-md border border-black hover:scale-[1.01] hover:border-b-4 hover:border-r-4 hover:border-black">
                                     Submit
                                 </button>
                             </span>
                         </div>
                     </form>
                 </div>
-                <a href="{{ object.get_delete_url }}"
-                class="mt-5 flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition duration-150 ease-in-out"
-                >Delete</a>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

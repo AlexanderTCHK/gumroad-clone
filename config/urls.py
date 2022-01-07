@@ -10,8 +10,8 @@ from products.views import (
     ProductListView, 
     UserProductListView, 
     ProductCreateView, 
+    UserLibraryView,
     # CreateCheckoutSessionView,
-    SuccessView,
     checkout_session_create,
     stripe_webhook,
 )
@@ -19,26 +19,27 @@ from products.views import (
 from users.views import (
     UserProfileView,
     StripeAccountLink,
+    
 )
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path("discover/", ProductListView.as_view(), name="discover" ),
-    path("products/", UserProductListView.as_view(), name="user-products"),
-    path("products/create/", ProductCreateView.as_view(), name="product-create"),
-    path("profile/", UserProfileView.as_view(), name="profile"),
+    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),#
+    path("discover/", ProductListView.as_view(), name="discover" ),# DONE
+    path("products/", UserProductListView.as_view(), name="user-products"),# DONE
+    path("library/", UserLibraryView.as_view(), name="user-library"),# DONE
+    path("products/create/", ProductCreateView.as_view(), name="product-create"), # DONE
+    path("profile/", UserProfileView.as_view(), name="profile"),#
     path("stripe/auth/", StripeAccountLink.as_view(), name="stripe-account-link"),
     path("p/", include("products.urls", namespace="products")),
     path("create-checkout-session/<slug>/", checkout_session_create, name="create-checkout-session"),
-    path("success/", SuccessView.as_view(), name="success"),
     path("webhooks/stripe/", stripe_webhook, name="stripe-webhook"),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
-    # User management
+    # User managementz
     path("users/", include("gumroad_clone.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 # API URLS
 urlpatterns += [
@@ -49,6 +50,9 @@ urlpatterns += [
 ]
 
 if settings.DEBUG:
+
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [

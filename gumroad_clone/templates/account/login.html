@@ -7,56 +7,52 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-    <div>
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-                Sign in
-            </h2>
-            <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
-                Or
-                <a href="{{ signup_url }}"
-                   class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                    Create an account
-                </a>
-            </p>
-        </div>
 
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="py-8 px-4 sm:rounded-lg sm:px-10">
-                {#                <div>#}
-                {#                    {% get_providers as socialaccount_providers %}#}
-                {#                    {% if socialaccount_providers %}#}
-                {#                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}#}
-                {#                        {% include "socialaccount/snippets/login_extra.html" %}#}
-                {#                    {% endif %}#}
-                {#                </div>#}
-                <div class="mt-4">
-                    <form action="{% url 'account_login' %}" method="POST">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        {% if redirect_field_value %}
-                            <input type="hidden" name="{{ redirect_field_name }}"
-                                   value="{{ redirect_field_value }}"/>
-                        {% endif %}
-                        <div class="mt-6">
-                            <span class="block w-full rounded-md shadow-sm">
-                                <button type="submit"
-                                        class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
-                                    {% trans "Sign In" %}
-                                </button>
-                            </span>
-                        </div>
-                        <div class="mt-6 flex items-center justify-between">
-                            <div class="text-sm leading-5">
-                                <a href="{% url 'account_reset_password' %}"
-                                   class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                                    {% trans "Forgot your password?" %}
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+<div class="bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0"
+    style="font-family:'Lato',sans-serif;">
+    <header class="max-w-lg mx-auto">
+        <a href="{% url 'home' %}">
+            <h1 class="text-4xl font-bold text-white text-center">DJANGO GUMROAD CLONE</h1>
+        </a>
+    </header>
+
+    <div class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+        <section>
+            <h3 class="font-bold text-2xl text-center"> Sign in</h3>
+            <p class="text-gray-600 pt-3 text-lg text-center">Or <a href="{{ signup_url }}"
+                    class="text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    Create an account
+                </a></p>
+
+        </section>
+
+        <section class="mt-5">
+            <form action="{% url 'account_login' %}" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <div class="mt-6">
+                    <span class="block w-full rounded-md shadow-sm">
+                        <button type="submit"
+                            class="w-full flex justify-center py-2 px-4 bg-pink-400 font-semibold text-lg rounded-md border border-black hover:scale-[1.01] hover:border-b-4 hover:border-r-4 hover:border-black">
+
+                            {% trans "Sign In" %}
+                        </button>
+                    </span>
                 </div>
-            </div>
-        </div>
+                <div class="mt-6 flex items-center justify-between">
+                    <div class="text-sm leading-5">
+                        <a href="{% url 'account_reset_password' %}"
+                            class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                            {% trans "Forgot your password?" %}
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </section>
     </div>
+
+</div>
 {% endblock %}

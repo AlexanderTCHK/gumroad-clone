@@ -6,14 +6,18 @@
     {% include "sidebar.html" %}
     <div class="flex-auto flex flex-col h-screen overflow-y-auto">
         <div class="flex flex-row flex-none h-1/5 items-center justify-between border-b-2 border-black">
-            <div class="text-4xl font-semibold ml-20">Discover new products!</div>
+            <div class="text-4xl font-semibold ml-20">Library of purchased products.</div>
 
         </div>
 
         <div class="w-full overflow-y-auto">
             <div class="ml-10 my-10 grid grid-custom md:grid-custom-md lg:grid-custom-lg gap-3">
                 <!--Cards-->
-                {% for product in object_list %}
+
+
+                {% for product in object_list.products.all %}
+
+
                 <a href="{{ product.get_absolute_url }}">
                     <div class="flex flex-col bg-stone-100 rounded-md overflow-hidden shadow hover:border-b-4 hover:border-r-4 hover:border-black min-w-[265px] h-[330px] max-w-[370px]
             border-2 border-black hover:scale-[1.01]">
@@ -34,16 +38,7 @@
                                 </svg>
                                 <div class="pl-2">{{ product.star}} ({{ product.num_reviews }})</div>
                             </div>
-                            <div class="px-2 text-lg">{{ product.price_display }} $</div>
-                            {% csrf_token %}
-                            <form action="{% url 'create-checkout-session' product.slug %}" method="POST">
-                                <button
-                                    class="mr-2 px-4 rounded-full border border-black text-lg font-semibold tracking-widest hover:text-white hover:bg-pink-400  hover:scale-[1.01] hover:border-b-2 hover:border-r-2 hover:border-black"
-                                    type="submit">
-                                    BUY</button>
-                            </form>
-
-
+                            <div class="px-10 text-lg">{{ product.price_display }} $</div>
                         </div>
                     </div>
                 </a>
