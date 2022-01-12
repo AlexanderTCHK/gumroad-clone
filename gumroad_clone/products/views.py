@@ -17,15 +17,21 @@ User = get_user_model()
 class ProductListView(generic.ListView):
     template_name = "discover.html"
     
-    def get_queryset(self):       
-        user_library = UserLibrary.objects.get(user=self.request.user)
-        purchased_products = user_library.products.all()
+    def get_queryset(self):  
+        
+        try:
+            
+            user_library = UserLibrary.objects.get(user=self.request.user)
+            purchased_products = user_library.products.all()
 
-        # Exclude own products
-        queryset = Product.objects.exclude(user=self.request.user)
-        # Exclude purchased products products
-        queryset = queryset.difference(purchased_products)
+            # Exclude own products
+            queryset = Product.objects.exclude(user=self.request.user)
+            # Exclude purchased products products
+            queryset = queryset.difference(purchased_products)
+        except:
+            queryset = Product.objects.all()
 
+        
         return queryset
     
 
