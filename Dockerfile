@@ -1,6 +1,9 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.10.1-slim-bullseye
 
+RUN apt-get update
+RUN  apt-get install gcc
+
 EXPOSE 8000
 
 # Keeps Python from generating .pyc files in the container
