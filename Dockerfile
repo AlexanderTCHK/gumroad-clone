@@ -1,11 +1,6 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.10.1-bullseye
 
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && \
-    apt-get -y install gcc mono-mcs && \
-    rm -rf /var/lib/apt/lists/*
-
 EXPOSE 8000
 
 # Keeps Python from generating .pyc files in the container
