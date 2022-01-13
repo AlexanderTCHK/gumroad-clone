@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Install pip requirements
 COPY /requirements requirements/
-RUN python -m pip install -r requirements/local.txt
+RUN python -m pip install -r requirements/production.txt
 
 WORKDIR /app
 COPY . /app
