@@ -16,8 +16,8 @@ RUN python -m pip install -r requirements/production.txt
 WORKDIR /app
 COPY . /app
 
-RUN ["python", "/app/manage.py", "collectstatic", "--noinput"]
-RUN ["python", "/app/manage.py", "migrate"]
+RUN ["python", "manage.py", "collectstatic", "--noinput"]
+RUN ["python", "manage.py", "migrate"]
 
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
