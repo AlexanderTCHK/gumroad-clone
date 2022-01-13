@@ -87,8 +87,8 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "users",
-    "gumroad_clone.theme.apps.ThemeConfig",
-    "products",
+    "theme.apps.ThemeConfig",
+    "products.apps.ProductsConfig",
     # Your stuff: custom apps go here
 ]
 

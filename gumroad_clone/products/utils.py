@@ -5,9 +5,10 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from .models import Product, PurchasedProduct
-from users.models import User
+from django.contrib.auth import get_user_model
 
 import stripe
+User = get_user_model()
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 

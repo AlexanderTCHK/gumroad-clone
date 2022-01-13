@@ -9,7 +9,7 @@ from .utils import checkout_session_create, stripe_webhook
 
 from .forms import ProductModelForm
 from .models import Product
-from users.models import UserLibrary
+from gumroad_clone.users.models import UserLibrary
 
 User = get_user_model()
 
